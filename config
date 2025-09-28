@@ -45,7 +45,7 @@ interval=1
 
 [volume]
 label=🎵
-command=pactl get-sink-mute @DEFAULT_SINK@ | grep -q "是" && echo "mute" || pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}' | sed 's/[%]//g'
+command=echo -n $(pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}'&&echo "(" &&echo $(pactl get-sink-mute @DEFAULT_SINK@) && echo ")")
 interval=once
 signal=10
 
