@@ -47,17 +47,18 @@ interval=1
 label=🎵
 command=echo -n $(pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}'&&echo "(" &&echo $(pactl get-sink-mute @DEFAULT_SINK@) && echo ")")
 interval=once
+interval=1 #for pavucontrol
 signal=10
 
-[brightnessctl]
-label=🔆
-command=brightnessctl info | grep -oP '\(\K\d+%' | tr -d '()'
-interval=5
-signal=12
+#[brightnessctl]
+#label=🔆
+#command=brightnessctl info | grep -oP '\(\K\d+%' | tr -d '()'
+#interval=5
+#signal=12
 
-[battery_acpi]
-command=apci
-interval=1
+#[battery_acpi]
+#command=apci
+#interval=1
 
 [powerprofilesctl]
 label=⚡
