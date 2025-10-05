@@ -1,0 +1,73 @@
+# i3blocks config file
+#
+# Please see man i3blocks for a complete reference!
+# The man page is also hosted at http://vivien.github.io/i3blocks
+#
+# List of valid properties:
+#
+# align
+# color
+# command
+# full_text
+# instance
+# interval
+# label
+# min_width
+# name
+# separator
+# separator_block_width
+# short_text
+# signal
+# urgent
+
+# Global properties
+#
+# The top properties below are applied to every block, but can be overridden.
+# Each block command defaults to the script name to avoid boilerplate.
+# Change $SCRIPT_DIR to the location of your scripts!
+separator_block_width=15
+markup=none
+
+[cpu_usage]
+label=cpu:
+command=sar -u 1 1 | tail -1 | awk '{printf "%.2f%%", 100 - $NF}'
+interval=1
+
+[memory_usage]
+label=mem:
+command=sar -r 1 1 | tail -1 | awk '{printf "%.2f%%", $5}'
+interval=1
+
+# Volume indicator
+# The first parameter sets the step (and units to display)
+# The second parameter overrides the mixer selection
+# See the script for details.
+
+[volume]
+label=🎵
+command=echo -n $(pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}'&&echo "(" &&echo $(pactl get-sink-mute @DEFAULT_SINK@) && echo ")" && echo $(pactl get-default-sink))
+interval=once
+interval=1 #for pavucontrol
+signal=10
+
+#[brightnessctl]
+#label=🔆
+#command=brightnessctl info | grep -oP '\(\K\d+%' | tr -d '()'
+#interval=5
+#signal=12
+
+#[battery_acpi]
+#command=apci
+#interval=1
+
+[powerprofilesctl]
+label=⚡
+command=powerprofilesctl get
+interval=1
+signal=11
+
+# Date Time
+#
+[time]
+command=date '+%Y-%m-%d %H:%M:%S'
+interval=1
