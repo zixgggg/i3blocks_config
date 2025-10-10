@@ -38,6 +38,11 @@ label=mem:
 command=sar -r 1 1 | tail -1 | awk '{printf "%.2f%%", $5}'
 interval=1
 
+[network]
+label=network:
+command=nmcli -g CONNECTION device status 
+interval=1
+
 # Volume indicator
 # The first parameter sets the step (and units to display)
 # The second parameter overrides the mixer selection
@@ -60,11 +65,11 @@ signal=10
 #command=apci
 #interval=1
 
-[powerprofilesctl]
-label=⚡
-command=powerprofilesctl get
-interval=1
-signal=11
+#[powerprofilesctl]
+#label=⚡
+#command=powerprofilesctl get
+#interval=1
+#signal=11
 
 # Date Time
 #
