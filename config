@@ -40,7 +40,8 @@ interval=1
 
 [network]
 label=network:
-command=nmcli -g CONNECTION device status 
+#command=nmcli -g CONNECTION device status 
+command=LANG=C nmcli -t -f active,ssid dev wifi | grep '^yes' | cut -d: -f2
 interval=1
 
 # Volume indicator
@@ -62,7 +63,7 @@ signal=10
 #signal=12
 
 #[battery_acpi]
-#command=apci
+#command=acpi
 #interval=1
 
 #[powerprofilesctl]
