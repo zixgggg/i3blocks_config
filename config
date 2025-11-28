@@ -51,26 +51,30 @@ interval=1
 
 [volume]
 label=🎵
-command=echo -n $(pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}'&&echo "(" &&echo $(pactl get-sink-mute @DEFAULT_SINK@) && echo ")" && echo $(pactl get-default-sink))
+#command=echo -n $(pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}'&&echo "(" &&echo $(pactl get-sink-mute @DEFAULT_SINK@) && echo ")" && echo $(pactl get-default-sink))
+#print volume device
+
+command=echo -n $(pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}'&&echo "(" &&echo $(pactl get-sink-mute @DEFAULT_SINK@) && echo ")")
+#won't print volume device
 interval=once
 interval=1 #for pavucontrol
 signal=10
 
-#[brightnessctl]
-#label=🔆
-#command=brightnessctl info | grep -oP '\(\K\d+%' | tr -d '()'
-#interval=5
-#signal=12
+[brightnessctl]
+label=🔆
+command=brightnessctl info | grep -oP '\(\K\d+%' | tr -d '()'
+interval=once
+signal=12
 
-#[battery_acpi]
-#command=acpi
-#interval=1
+[battery_acpi]
+command=acpi
+interval=1
 
-#[powerprofilesctl]
-#label=⚡
-#command=powerprofilesctl get
-#interval=1
-#signal=11
+[powerprofilesctl]
+label=⚡
+command=powerprofilesctl get
+interval=once
+signal=11
 
 # Date Time
 #
